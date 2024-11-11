@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface JobPosting {
   id: string;
@@ -11,6 +12,7 @@ interface JobPosting {
 }
 
 const JobPostingsDashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [newJobPosting, setNewJobPosting] = useState<Partial<JobPosting>>({
@@ -108,6 +110,14 @@ const JobPostingsDashboard: React.FC = () => {
                   className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"
                 >
                   Delete
+                </Button>
+              </td>
+              <td className="p-2 border text-center">
+                <Button
+                  onClick={() => navigate(`/jobs/${jobPosting.id}/candidates`)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded"
+                >
+                  View Candidates
                 </Button>
               </td>
             </tr>
